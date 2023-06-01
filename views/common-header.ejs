@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <img src="/images/mogush_logo.png" alt="mogush_logo" style="width: 10vw" />
+    <h1 class="text-center">Electronic Medical Record(EMR)</h1>
+  </div>
+  <div class="row my-3 gy-3 mb-3">
+    <div class="col d-flex justify-content-center">
+      <h3><%= title %></h3>
+    </div>
+
+    <nav
+      class="navbar navbar-expand-lg navbar-dark"
+      style="background-color: #432983"
+    >
+      <div class="container">
+        <a class="navbar-brand"><span id="welcome"></span> </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"> </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto d-flex">
+            <li class="nav-item me-4 fs-5">
+              <a class="nav-link" href="/api/GP">Practitioner</a>
+            </li>
+            <li class="nav-item me-4 fs-5">
+              <a class="nav-link" href="/api/pet">Pet</a>
+            </li>
+            <li class="nav-item me-4 fs-5">
+              <a class="nav-link" href="/api/history">History</a>
+            </li>
+            <li class="nav-item">
+              <button id="logout" type="button" class="btn btn-warning">
+                Log Out
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <hr />
+  </div>
+
+  <script>
+    const yourname = localStorage.getItem("username");
+
+    const welcome = document.getElementById("welcome");
+    welcome.innerHTML = `Welcome, ${yourname}`;
+  </script>
+
+  <script>
+    let logoutBtn = document.getElementById("logout");
+    // logout button
+    logoutBtn.onclick = () => {
+      localStorage.removeItem("token");
+      location.href = "/login";
+    };
+  </script>
+
+  <script>
+    // const pathname= window.location.pathname
+    // let bgcolor = "";
+    // console.log("pathname:",pathname);
+    // switch (pathname ){
+    //   case "/api/GP":
+    //     bgcolor = "#cff4fc";
+    //     break;
+    //     case "/api/pet":
+    //     bgcolor ="#F8D7DA"
+    //     break;
+    //     default:
+    // bgcolor = "#cff4fc"
+    // break;
+    // }
+    // console.log("bgcolor is:",bgcolor);
+  </script>
+</div>

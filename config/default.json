@@ -1,0 +1,7 @@
+{
+  "shortsPrivateKey": "mogush",
+  "secret":"lei-secret",
+  "db": {
+    "connectionString": "mongodb://127.0.0.1:27017/mogush_vet"
+  }
+}
