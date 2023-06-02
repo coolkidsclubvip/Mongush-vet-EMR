@@ -43,7 +43,7 @@ const petController = {
         admission_date
       );
       res.status(200).json("information uploaded!");
-    } catch {
+    } catch(error) {
       res.status(500).send("registration failed");
     }
   },
@@ -52,19 +52,31 @@ const petController = {
     console.log(req.body, req.params.id);
     const { name, age, species, GPId, admission_date } = req.body;
     const id = req.params.id;
-    await petService.updatePet(name, age, species, GPId, admission_date);
-    res.status(200).json("information updated!");
+    try {
+      await petService.updatePet(name, age, species, GPId, admission_date);
+      res.status(200).json("information updated!");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
   },
 
   deletePet: async function (req, res) {
-    await petService.deletePet(req.params.id);
-    res.json("information deleted!");
+    try {
+      await petService.deletePet(req.params.id);
+      res.json("information deleted!");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
   },
 
   getPetList: async function (req, res) {
     const { page, limit } = req.query;
-    const data = await petService.getPetList(page, limit);
-    res.status(200).send(data);
+    try {
+      const data = await petService.getPetList(page, limit);
+      res.status(200).send(data);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
   },
 
  

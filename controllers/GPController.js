@@ -64,19 +64,34 @@ const GPController = {
     console.log(req.body, req.params.id);
     const { hashedPassword } = req.body;
     const id = req.params.id;
+
+    try {
     await GPService.updateGP(id, hashedPassword);
     res.status(200).json("information updated!");
-  },
+  } catch(error){
+    console.log(error);
+      res.status(500).send(error.message)
+  }
+},
 
   deleteGP: async function (req, res) {
+    try{
     await GPService.deleteGP(req.params.id);
-    res.json("information deleted!");
+    res.json("information deleted!");}
+    catch (error){
+       console.log(error);
+      res.status(500).send(error.message)
+    }
   },
 
   getGPList: async function (req, res) {
     const { page, limit } = req.query;
+
+    try {
     const data = await GPService.getGPList(page, limit);
-    res.status(200).send(data);
+    res.status(200).send(data);}
+    catch(error){  console.log(error);
+    res.status(500).send(error.message) }
   },
 
   // Login authorization check

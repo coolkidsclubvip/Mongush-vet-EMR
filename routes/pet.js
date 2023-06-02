@@ -10,7 +10,7 @@ router.get("/", function (req, res, next) {
 });
 
 // add a new pet
-router.post("/", upload, petController.addPet);
+router.post("/", petController.addPet);
 
 // delete a pet
 router.delete("/:id", petController.deletePet);

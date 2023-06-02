@@ -12,7 +12,7 @@ router.get("/", function (req, res, next) {
 
 
 // 添加 的路由中间件
-router.post("/", isAdmin,upload.single("avatar"), GPController.addGP);
+router.post("/", upload.single("avatar"), GPController.addGP);
 
 // 更新 的路由中间件
 router.put("/:id", isAdmin, GPController.updateGP); 
