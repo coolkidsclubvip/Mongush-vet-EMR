@@ -42,7 +42,7 @@ app.use(
 );
 
 //////////////////////////// token/////////////////！！
-// app.use(authenticate);
+app.use(authenticate);
 
 app.use("/", indexRouter);
 app.use("/login", loginRouter);

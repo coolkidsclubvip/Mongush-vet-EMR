@@ -53,7 +53,7 @@ const GPController = {
         avatar,
         isadmin
       );
-      res.status(200).json("information uploaded!");
+      res.status(200).json("Information uploaded");
     } catch (error) {
       console.log(error);
       res.status(500).send(error.message);
@@ -66,21 +66,21 @@ const GPController = {
     const id = req.params.id;
 
     try {
-    await GPService.updateGP(id, hashedPassword);
-    res.status(200).json("information updated!");
-  } catch(error){
-    console.log(error);
-      res.status(500).send(error.message)
-  }
-},
+      await GPService.updateGP(id, hashedPassword);
+      res.status(200).json("information updated!");
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
+    }
+  },
 
   deleteGP: async function (req, res) {
-    try{
-    await GPService.deleteGP(req.params.id);
-    res.json("information deleted!");}
-    catch (error){
-       console.log(error);
-      res.status(500).send(error.message)
+    try {
+      await GPService.deleteGP(req.params.id);
+      res.json("information deleted!");
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
     }
   },
 
@@ -88,10 +88,12 @@ const GPController = {
     const { page, limit } = req.query;
 
     try {
-    const data = await GPService.getGPList(page, limit);
-    res.status(200).send(data);}
-    catch(error){  console.log(error);
-    res.status(500).send(error.message) }
+      const data = await GPService.getGPList(page, limit);
+      res.status(200).send(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
+    }
   },
 
   // Login authorization check

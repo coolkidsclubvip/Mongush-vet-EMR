@@ -1,6 +1,5 @@
 // automatically fetch list when render
 const fetchListAndRenderGP = () => {
-
   axios
     .get("/api/GP/list?page=1&limit=50")
     .then((res) => {
@@ -47,7 +46,6 @@ registrationForm.addEventListener("submit", (event) => {
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then((res) => {
-      console.log("res is " + res);
       if (!res) {
         toastr.error("An Error Occurred");
       } else {
