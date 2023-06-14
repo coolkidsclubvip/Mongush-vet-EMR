@@ -1,6 +1,6 @@
 const JWT = require("../util/JWT");
 const config = require("../config/default.json");
-const secret = config.secret;
+const secret = process.env.SECRET;
 
 function isAdmin(req, res, next) {
   // Get the token from the Authorization header by removing the "Bearer " prefix

@@ -4,7 +4,7 @@ const { GPModel } = require("../models/GPModel");
 
 const petController = {
   addPet: async function (req, res, next) {
-    console.log("req.body==", req.body);
+    console.log("$$$@@req.body==", req.body);
 
     // Joi validation
     let { error } = validatePet(req.body);
@@ -43,7 +43,7 @@ const petController = {
         admission_date
       );
       res.status(200).json("information uploaded!");
-    } catch(error) {
+    } catch (error) {
       res.status(500).send("registration failed");
     }
   },
@@ -78,8 +78,6 @@ const petController = {
       res.status(500).send(error.message);
     }
   },
-
- 
 
   // 退出登录（销毁session)
   logout: function (req, res) {

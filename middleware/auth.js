@@ -10,7 +10,7 @@ function authenticate(req, res, next) {
 
   if (token) {
     const payload = JWT.verify(token);
-    console.log("@@@payload is", payload);
+  
     if (payload) {
       //recalculate token expiration time
       const newToken = JWT.generate(

@@ -46,7 +46,7 @@ const historyModel = mongoose.model(
 function validatePet(pet) {
   const schema = Joi.object({
     name: Joi.string().min(3).required(),
-    age: Joi.string(),
+    age: Joi.number(),
     species: Joi.string().required(),
     owner_name: Joi.string().required(),
     owner_phone: Joi.string()
