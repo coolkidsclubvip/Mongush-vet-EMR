@@ -13,11 +13,11 @@ const GPSchema = new mongoose.Schema({
     default: Date.now(),
   },
   avatar: String,
-  isadmin:Boolean
+  isadmin: Boolean,
 });
 // GPmodel
 
-const GPModel = mongoose.model("GP", GPSchema);
+const GPModel = mongoose.models.GP || mongoose.model("GP", GPSchema);
 
 //JOI Validation
 function validateGP(GP) {
@@ -32,7 +32,7 @@ function validateGP(GP) {
     birth_year: Joi.number().integer().min(1900).max(2013),
     occupation: Joi.required(),
     avatar: Joi.string().optional().allow(null, ""),
-    isadmin:Joi.boolean()
+    isadmin: Joi.boolean(),
   });
   return schema.validate(GP);
 }

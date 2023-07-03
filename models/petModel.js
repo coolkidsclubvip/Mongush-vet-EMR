@@ -23,7 +23,7 @@ const petType = {
 
 };
 // Pet model
-const petModel = mongoose.model("pets", new mongoose.Schema(petType));
+const petModel = mongoose.models.pets || mongoose.model("pets", new mongoose.Schema(petType));
 
 // Extend the existing pet model schema
 const petSchema = mongoose.model("pets").schema;
@@ -35,7 +35,7 @@ petSchema.add({
 });
 
 // Create the discharged pet model
-const historyModel = mongoose.model(
+const historyModel = mongoose.models.pet_discharged_history || mongoose.model(
   "pet_discharged_history",
   petSchema
 );

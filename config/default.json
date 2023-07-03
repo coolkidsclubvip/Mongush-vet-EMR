@@ -1,6 +1,3 @@
 {
-  "shortsPrivateKey": "mogush",
-  "db": {
-    "connectionString": "mongodb://127.0.0.1:27017/mogush_vet"
-  }
+  "shortsPrivateKey": "mogush"
 }
