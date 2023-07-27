@@ -12,7 +12,7 @@ const petController = {
     if (error) {
       console.log(error.message);
       res.status(400).send(error.details[0].message);
-
+  
       // res.render("index", { registerError:"Invalid registration"});  NOT WORKING!!
       return;
     }

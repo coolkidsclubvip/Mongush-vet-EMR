@@ -60,10 +60,12 @@ pregistrationForm.addEventListener("submit", (event) => {
   axios
     .post("/api/pet", pformData) // here axios.post without header is still OK.
     .then((res) => {
-      res && toastr.success("Register success");
+console.log("res is",res);
+
+      res ? toastr.success("Register success") : toastr.error("Invalid Input");
       fetchListAndRenderPet();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("err:",err));
 
   // reset the form content after registration
   pregistrationForm.reset();
