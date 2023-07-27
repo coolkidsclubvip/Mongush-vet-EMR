@@ -37,7 +37,7 @@ const GPController = {
       error = await validateFile(req.file, 1000000, "image");
       if (error) return res.status(400).send(error.message || error);
 
-      let avatar = `/uploads/avatar/${req.file.filename}`; // use uploaded avatar
+      avatar = `/uploads/avatar/${req.file.filename}`; // use uploaded avatar
     }
 
     /////////////////bcrypt//////////

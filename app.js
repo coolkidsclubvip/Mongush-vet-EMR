@@ -4,12 +4,18 @@
  * Module dependencies.
  */
 
-var app = require("../index.js");
+var app = require("./index.js");
 var debug = require("debug")("myapp:server");
 var http = require("http");
 
+//connect to MongoDB database
+const connectMongo= require("./lib/connectMongo")
+connectMongo()
+
+
+
 //require database module
-require("../config/db.config");
+require("./config/db.config.js");
 
 /**
  * Get port from environment and store in Express.

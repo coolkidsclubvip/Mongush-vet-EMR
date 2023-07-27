@@ -20,6 +20,7 @@ const authenticate = require("./middleware/auth");
 const app = express();
 
 
+
 //Setup Config
 process.env["NODE_CONFIG_DIR"] = __dirname + "/config/"; //Stores the location of the config in a ENV VAR
 const config = require("./config/default.json"); //Allow you to have different configs for different environments
