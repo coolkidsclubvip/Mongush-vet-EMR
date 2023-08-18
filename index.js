@@ -1,62 +1,95 @@
-const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
-const JWT = require("./util/JWT");
-const fileUpload = require("express-fileupload"); //When you upload a file, the file will be accessible from req.files
-const helmet = require("helmet");
-const axios = require("axios");
-const indexRouter = require("./routes/index");
-const GPRouter = require("./routes/GP");
-const petRouter = require("./routes/pet");
-const loginRouter = require("./routes/login");
-const historyRouter = require("./routes/history");
-const uploadRouter = require("./routes/upload");
-const errorRouter = require("./routes/error");
-const authenticate = require("./middleware/auth");
-const app = express();
+
+
+/**
+ * Module dependencies.
+ */
+
+var app = require("./app.js");
+var debug = require("debug")("myapp:server");
+var http = require("http");
+
+//connect to MongoDB database
+const connectMongo= require("./lib/connectMongo.js")
+connectMongo()
 
 
 
-//Setup Config
-process.env["NODE_CONFIG_DIR"] = __dirname + "/config/"; //Stores the location of the config in a ENV VAR
-const config = require("./config/default.json"); //Allow you to have different configs for different environments
+//require database module
+require("./config/db.config.js");
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true })); //Parse incoming Form data, available
-// app.use(fileUpload({ createParentPath: true })); // enable files upload
-app.use(logger("dev"));
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+/**
+ * Get port from environment and store in Express.
+ */
 
-//////////////////helmet
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-    xDownloadOptions: false,
-  })
-);
+var port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 
-//////////////////////////// token/////////////////！！
-app.use(authenticate);
+/**
+ * Create HTTP server.
+ */
 
-app.use("/", indexRouter);
-app.use("/login", loginRouter);
-app.use("/api/GP", GPRouter);
-app.use("/api/pet", petRouter);
-app.use("/api/history", historyRouter);
-// app.use("/*", errorRouter)
+var server = http.createServer(app);
 
-// // error handler// use toastr notification handler
-app.use(function (err, req, res, next) {
-  console.error("An error occurred:", err);
-  res.status(500).json({ error: err.message });
-});
+/**
+ * Listen on provided port, on all network interfaces.
+ */
 
-module.exports = app;
+server.listen(port);
+server.on("error", onError);
+server.on("listening", onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  debug("Listening on " + bind);
+}
