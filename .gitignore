@@ -3,3 +3,5 @@
 
 # local env files
 .env*.local
+# Local Netlify folder
+.netlify
