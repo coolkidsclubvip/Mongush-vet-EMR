@@ -5,12 +5,11 @@ const fetchListAndRenderHistory = () => {
   axios
     .get("/api/history/list?page=1&limit=100")
     .then((res) => {
-      console.log("Res is", res);
       res = res.data;
-      
+
       pcount.innerHTML = res.length;
       let tbody = document.querySelector("tbody");
-     
+
       tbody.innerHTML = res
         .map(
           (item) => `<tr>
@@ -24,7 +23,9 @@ const fetchListAndRenderHistory = () => {
                    <td>${new Date(
                      item.admission_date
                    ).toLocaleDateString()}</td>
-                   <td>${new Date(item.discharge_date).toLocaleDateString()}</td>
+                   <td>${new Date(
+                     item.discharge_date
+                   ).toLocaleDateString()}</td>
               
                   <td><button class="btn btn-danger" onclick=deleteHandler('${
                     item._id
