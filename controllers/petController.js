@@ -4,15 +4,13 @@ const { GPModel } = require("../models/GPModel");
 
 const petController = {
   addPet: async function (req, res, next) {
-    console.log("$$$@@req.body==", req.body);
-
     // Joi validation
     let { error } = validatePet(req.body);
 
     if (error) {
       console.log(error.message);
       res.status(400).send(error.details[0].message);
-  
+
       // res.render("index", { registerError:"Invalid registration"});  NOT WORKING!!
       return;
     }

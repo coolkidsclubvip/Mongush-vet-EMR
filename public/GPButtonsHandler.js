@@ -4,7 +4,7 @@ const fetchListAndRenderGP = () => {
     .get("/api/GP/list?page=1&limit=50")
     .then((res) => {
       res = res.data;
-      console.log(res);
+    
       count.innerHTML = res.length;
       let tbody = document.querySelector("tbody");
 

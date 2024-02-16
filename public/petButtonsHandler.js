@@ -86,6 +86,7 @@ const deleteHandler = (id) => {
 
 // discharge button handler
 const dischargeHandler = (id) => {
+  console.log("id in dischargeHandler is",id);
   axios.post(`/api/history/${id}`);
   deleteHandler(id);
   toastr.success("Discharge success");

@@ -24,6 +24,7 @@ const historyService = {
 
   addPetHistory: async function (req, res) {
     // find the pet
+    console.log("Req in addPetHistory is:",req);
     id = req.params.id;
     let pet = await petModel.findById({ _id: req.params.id });
     console.log("pet is",pet);
